@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/11 14:26:22 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/05/19 19:24:23 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fract		*fractol_iter(t_fract *env, int (algo)(int, int, t_complex))
+t_env		*fractol_iter(t_env *env, int (algo)(int, int, t_complex))
 {
 	int			x;
 	int			y;
@@ -37,12 +37,21 @@ t_fract		*fractol_iter(t_fract *env, int (algo)(int, int, t_complex))
 	return (env);
 }
 
-t_fract		*fractol_init()
+t_env		*fractol_init(void)
 {
-	t_fract *env;
+	t_env	*env;
+	t_move	*move;
 
-	if ((env = (t_fract *)malloc(sizeof(t_fract))) == NULL)
+	if ((env = (t_env *)malloc(sizeof(t_env))) == NULL)
 		exit(0);
+	if ((move = (t_move *)malloc(sizeof(t_move))) == NULL)
+	{
+		free(env);
+		exit(0);
+	}
+	move->x = 0;
+	move->y = 0;
+	env->move = move;
 	env->mlx = mlx_init();
 	env->win = mlx_new_window(env->mlx, WIN_X, WIN_Y, "Fractol");
 	env->img = mlx_new_image(env->mlx, WIN_X, WIN_Y);

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:11:39 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/12 17:48:52 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/05/19 17:53:55 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_complex	c_add(t_complex a, t_complex b)
 
 	c.x = a.x + b.x;
 	c.y = a.y + b.y;
-	return c;
+	return (c);
 }
 
 t_complex	c_sqr(t_complex a)
@@ -34,4 +34,3 @@ double		c_mod(t_complex c)
 {
 	return (sqrt(c.x * c.x + c.y * c.y));
 }
-

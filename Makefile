@@ -15,6 +15,7 @@ SRC_NAME = mandelbrot.c \
 		   main.c \
 		   color.c \
 		   complex.c \
+		   keyhook.c \
 		   fractol.c
 
 SRC_PATH = ./srcs/

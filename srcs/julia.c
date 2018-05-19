@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/12 18:12:41 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/05/19 17:39:10 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ int		julia(int x, int y, t_complex c)
 		z0 = z1;
 		count++;
 	}
-	return fractol_color_scale(0);
+	return (fractol_color_scale(0));
 }

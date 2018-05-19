@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:59:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/12 18:28:38 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/05/19 18:08:58 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandelbrot(int x, int y, t_complex c)
+int	mandel(int x, int y, t_complex c)
 {
 	int			count;
 	t_complex	z0;
