@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/19 19:27:27 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/06/01 17:46:55 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ struct						s_move
 };
 
 int 						mandel(int x, int y, t_complex c);
-int 						julia(int x, int y, t_complex c);
-int 						other(int x, int y, t_complex c);
+int 						julias(int x, int y, t_complex c);
+int 						burnin(int x, int y, t_complex c);
+int 						newton(int x, int y, t_complex c);
 int							fractol_color_scale(float count);
 
 int							key_hook(int keycode, void *param);
+int							ft_strequ(const char *s1, const char *s2);
 #endif

@@ -9,13 +9,15 @@ INC_PATH = ./includes/ \
 LIB = -L ./mlx -lmlx
 
 # SOURCES
-SRC_NAME = mandelbrot.c \
-		   julia.c \
-		   other.c \
+SRC_NAME = mandel.c \
+		   julias.c \
+		   burnin.c \
+		   newton.c \
 		   main.c \
 		   color.c \
 		   complex.c \
 		   keyhook.c \
+		   str_utils.c \
 		   fractol.c
 
 SRC_PATH = ./srcs/

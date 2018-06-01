@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   newton.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/01 16:25:54 by fmadura           #+#    #+#             */
+/*   Updated: 2018/06/01 18:37:37 by fmadura          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+
+int		newton(int x, int y, t_complex c)
+{
+	int			count;
+	t_complex	z0;
+	t_complex	z1;
+
+	c.x = MIN_X + x * PIX_WDT;
+	c.y = MIN_Y + y * PIX_HGT;
+	if (fabs(c.y) < PIX_HGT / 2)
+		c.y = 0;
+	count = 0;
+	z0.x = 0;
+	z0.y = 0;
+	while (count < MAXITER)
+	{
+		z1.x = z0.x * z0.x * z0.x - (3 * z0.x * z0.y * z0.y) - c.x; 	
+		z1.y = (3 * z0.x * z0.x * z0.y) - z0.y * z0.y * z0.y - c.y;
+		if (c_mod(z1) > RADSQR)
+			return (fractol_color_scale(count % 100));
+		z0 = z1;
+		count++;
+	}
+	return (0);
+}
