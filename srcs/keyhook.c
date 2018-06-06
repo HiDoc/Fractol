@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/19 19:26:01 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/06/06 19:10:09 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,32 @@ static int	key_exit(int keycode, t_env *env)
 	return (0);
 }
 
+static int	key_color(int keycode, t_env *env)
+{
+	int x;
+	int y;
+	int pos;
+
+	pos = 0;
+	y = 0;
+	if (keycode == 13)
+	{
+		while (y < WIN_Y)
+		{
+			x = 0;
+			while (x < WIN_X)
+			{
+				env->tab[pos] = color_add(env->tab[pos]);
+				pos++;
+				x++;
+			}
+			y++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 int			key_hook(int keycode, void *param)
 {
 	t_env	*env;
@@ -53,6 +79,7 @@ int			key_hook(int keycode, void *param)
 	hooked = 0;
 	hooked += key_move(keycode, env);
 	hooked += key_zoom(keycode, env);
+	hooked += key_color(keycode, env);
 	hooked += key_exit(keycode, env);
 	if (hooked)
 	{

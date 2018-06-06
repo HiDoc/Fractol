@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   fractol_mandelbrot.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/06 20:05:50 by fmadura          ###   ########.fr       */
+/*   Created: 2018/05/09 16:59:55 by fmadura           #+#    #+#             */
+/*   Updated: 2018/06/06 20:30:37 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		julias(int x, int y, t_complex c)
+int	tripe(int x, int y, t_complex c)
 {
 	int			count;
 	t_complex	z0;
 	t_complex	z1;
 
-	z0.x = RADSQR * (x - WIN_X / 2.0) / WIN_X;
-	z0.y = RADSQR * (y - WIN_Y / 2.0) / WIN_Y;
+	c.x = MIN_X + x * PIX_WDT;
+	c.y = MIN_Y + y * PIX_HGT;
+	if (fabs(c.y) < PIX_HGT / 2)
+		c.y = 0;
 	count = 0;
+	z0.x = 0;
+	z0.y = 0;
 	while (count < MAXITER)
 	{
-		z1 = c_add(c_sqr(z0), c);
-		if (c_mod(z1) > RADIUS)
+		z1.x = z0.x * z0.x - z0.y * z0.y + c.x;
+		z1.y = 2 * z0.x * z0.y + c.y;
+		if (c_mod(z1) > RADSQR)
 			return (fractol_color_scale(count % 100));
 		z0 = z1;
 		count++;
 	}
-	return (fractol_color_scale(0));
+	return (0);
 }

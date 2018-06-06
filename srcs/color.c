@@ -6,12 +6,11 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/12 18:31:36 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/06/06 18:57:04 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 static int	color_mixer(int c1, int c2, float mix)
 {
@@ -28,6 +27,10 @@ static int	color_mixer(int c1, int c2, float mix)
 	return ((int)(r + g + b));
 }
 
+int			color_add(int c1)
+{
+	return (color_mixer(c1, c1 + c1, 0.5));
+}
 int			fractol_color_scale(float count)
 {
 	int		rgb;

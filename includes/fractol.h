@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/01 17:46:55 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/06/06 20:07:01 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <math.h>
 
-# define MAXITER 200
+# define MAXITER 50
 
 # define WIN_X 800
 # define WIN_Y 800
@@ -48,14 +49,16 @@ double						c_mod(t_complex c);
 
 struct						s_env
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		*tab;
-	int		bpp;
-	int		sl;
-	int		endian;
-	t_move	*move;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*tab;
+	int			bpp;
+	int			sl;
+	int			endian;
+	t_move		*move;
+	t_complex	c;
+	int			(*algo)(int, int, t_complex);
 };
 
 t_env						*fractol_init();
@@ -63,15 +66,18 @@ t_env						*fractol_iter(t_env *env, int (f)(int, int, t_complex));
 
 struct						s_move
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 };
 
 int 						mandel(int x, int y, t_complex c);
 int 						julias(int x, int y, t_complex c);
 int 						burnin(int x, int y, t_complex c);
 int 						newton(int x, int y, t_complex c);
+int 						tripe(int x, int y, t_complex c);
+
 int							fractol_color_scale(float count);
+int							color_add(int c1);
 
 int							key_hook(int keycode, void *param);
 int							ft_strequ(const char *s1, const char *s2);

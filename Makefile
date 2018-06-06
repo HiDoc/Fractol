@@ -12,6 +12,7 @@ LIB = -L ./mlx -lmlx
 SRC_NAME = mandel.c \
 		   julias.c \
 		   burnin.c \
+		   tripe.c \
 		   newton.c \
 		   main.c \
 		   color.c \

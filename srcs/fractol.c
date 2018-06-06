@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/05/19 19:24:23 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/06/06 19:40:34 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ t_env		*fractol_iter(t_env *env, int (algo)(int, int, t_complex))
 
 	y = 0;
 	pos = 0;
-	c.x = 0;
-	c.y = 0;
+	c = env->c;
 	while (y < WIN_Y)
 	{
 		x = 0;
@@ -39,8 +38,8 @@ t_env		*fractol_iter(t_env *env, int (algo)(int, int, t_complex))
 
 t_env		*fractol_init(void)
 {
-	t_env	*env;
-	t_move	*move;
+	t_env		*env;
+	t_move		*move;
 
 	if ((env = (t_env *)malloc(sizeof(t_env))) == NULL)
 		exit(0);
@@ -49,6 +48,8 @@ t_env		*fractol_init(void)
 		free(env);
 		exit(0);
 	}
+	env->c.x = 0;
+	env->c.y = 0;
 	move->x = 0;
 	move->y = 0;
 	env->move = move;
