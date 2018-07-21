@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 13:38:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/06 20:07:40 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/21 18:08:01 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int mouse_move(int x, int y, t_env *env)
 		env->c.x = (double)(x - 400) / (double)WIN_X * 2;	
 		env->c.y = (double)(y - 400)/ (double)WIN_Y * 2;	
 	}
-	printf("%f , %f\n",env->c.x, env->c.y);
 	env = fractol_iter(env, env->algo);
 	mlx_clear_window(env->mlx, env->win);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, env->move->x, env->move->y);

@@ -61,4 +61,4 @@ fclean : clean
 re : fclean all
 
 run : all 
-	./fractol
+	./fractol Julia

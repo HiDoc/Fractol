@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/06 19:10:09 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/21 19:06:34 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	key_color(int keycode, t_env *env)
 			x = 0;
 			while (x < WIN_X)
 			{
-				env->tab[pos] = color_add(env->tab[pos]);
+				env->tab[pos] = (env->tab[pos]);
 				pos++;
 				x++;
 			}

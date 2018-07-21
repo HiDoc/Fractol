@@ -6,37 +6,110 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/06 18:57:04 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/21 19:31:42 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	color_mixer(int c1, int c2, float mix)
+void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 {
-	float	r;
-	float	g;
-	float	b;
+	int i;
+	double f;
+	double p;
+	double q;
+	double t;
 
-	r = ((c1 & 0xFF0000) * (1 - mix) + (c2 & 0xFF0000) * (mix));
-	g = ((c1 & 0xFF00) * (1 - mix) + (c2 & 0xFF00) * (mix));
-	b = ((c1 & 0xFF) * (1 - mix) + (c2 & 0xFF) * (mix));
-	r = ((int)r) & 0xff0000;
-	g = ((int)g) & 0xff00;
-	b = ((int)b) & 0xff;
-	return ((int)(r + g + b));
+	if (hsv.h == 360)
+		hsv.h = 0;
+	else
+		hsv.h = hsv.h / 60;
+	i = (int)trunc(hsv.h);
+	f = hsv.h - i;
+	p = hsv.v * (1.0 - hsv.s);
+	q = hsv.v * (1.0 - (hsv.s * f));
+	t = hsv.v * (1.0 - (hsv.s * (1.0 - f)));
+
+	switch (i)
+	{
+		case 0:
+			*r = hsv.v;
+			*g = t;
+			*b = p;
+			break;
+
+		case 1:
+			*r = q;
+			*g = hsv.v;
+			*b = p;
+			break;
+
+		case 2:
+			*r = p;
+			*g = hsv.v;
+			*b = t;
+			break;
+
+		case 3:
+			*r = p;
+			*g = q;
+			*b = hsv.v;
+			break;
+
+		case 4:
+			*r = t;
+			*g = p;
+			*b = hsv.v;
+			break;
+
+		default:
+			*r = hsv.v;
+			*g = p;
+			*b = q;
+			break;
+	}
 }
 
-int			color_add(int c1)
+t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
 {
-	return (color_mixer(c1, c1 + c1, 0.5));
+	double r;
+	double g;
+	double b;
+
+	r = 0;
+	g = 0;
+	b = 0;
+
+	if (hsv.s == 0)
+	{
+		r = hsv.v;
+		g = hsv.v;
+		b = hsv.v;
+	}
+	else
+		hsv_get_val(hsv, &r, &g, &b);
+
+	rgb.r = b * 255;
+	rgb.g = g * 255;
+	rgb.b = r * 255;
+
+	return rgb;
 }
+
 int			fractol_color_scale(float count)
 {
-	int		rgb;
-	float	mix;
+	t_rgb	rgb;
+	t_hsv	hsv;
+	int		ret;
 
-	mix = count / MAXITER * 100;
-	rgb = color_mixer(0xFF0000, 0xFF1236, mix);
-	return (rgb);
+	hsv.h = 0.95 + 10 * (count / MAXITER * 100);
+	hsv.s = 1.0;
+	hsv.v = 1.0;
+	rgb.r = 0;
+	rgb.g = 0;
+	rgb.b = 0;
+	rgb = hsv_to_rgb(hsv, rgb);
+
+	ret = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
+	return (ret);
 }
