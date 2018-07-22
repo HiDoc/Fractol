@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 15:29:49 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 18:53:39 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,13 @@ t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
 	return rgb;
 }
 
-int			fractol_color_scale(float count)
+int			fractol_color_scale(t_env *env, float count)
 {
 	t_rgb	rgb;
 	t_hsv	hsv;
 	int		ret;
 
+	(void)env;
 	hsv.h = (count / MAXITER) * 360;
 	hsv.s = 1.0;
 	hsv.v = 1.0; 

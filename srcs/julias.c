@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 17:51:20 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 18:05:52 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int		julias(t_env *env, int x, int y, t_complex c)
 	{
 		z1 = c_add(c_sqr(z0), c);
 		if (c_mod(z1) > RADIUS)
-			return (fractol_color_scale(count));
+			return (fractol_color_scale(env, count));
 		z0 = z1;
 		count++;
 	}
-	return (fractol_color_scale(count));
+	return (fractol_color_scale(env, count));
 }

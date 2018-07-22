@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:59:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 17:51:30 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 18:05:33 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	mandel(t_env *env, int x, int y, t_complex c)
 		z1.x = z0.x * z0.x - z0.y * z0.y + c.x;
 		z1.y = 2 * z0.x * z0.y + c.y;
 		if (c_mod(z1) > RADSQR)
-			return (fractol_color_scale(count));
+			return (fractol_color_scale(env, count));
 		z0 = z1;
 		count++;
 	}
-	return (fractol_color_scale(count));
+	return (fractol_color_scale(env, count));
 }

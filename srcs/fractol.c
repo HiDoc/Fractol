@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 17:54:33 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 18:54:23 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_env		*fractol_iter(t_env *env, int (algo)(int, int, t_complex))
+t_env		*fractol_iter(t_env *env, int (algo)(t_env *, int, int, t_complex))
 {
 	int			x;
 	int			y;

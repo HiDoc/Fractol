@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 13:38:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 17:54:19 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 19:01:58 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int		main(int argc, char **argv)
 		else if (ft_strequ(argv[1], "Tripe"))
 			env->algo = &tripe;
 		else
+		{
+			free(env);
 			return (0);
+		}
 		env = fractol_iter(env, env->algo);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 		mlx_key_hook(env->win, &key_hook, env);
