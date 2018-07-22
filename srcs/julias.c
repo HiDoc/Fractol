@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/21 19:06:31 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 17:51:20 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		julias(int x, int y, t_complex c)
+int		julias(t_env *env, int x, int y, t_complex c)
 {
 	int			count;
 	t_complex	z0;

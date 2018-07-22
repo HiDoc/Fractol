@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/21 19:31:40 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 17:53:50 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <limits.h>
 # include <math.h>
 
-# define MAXITER 300
+# define MAXITER 30
 
 # define WIN_X 800
 # define WIN_Y 800
@@ -59,7 +59,7 @@ struct						s_env
 	int			endian;
 	t_move		*move;
 	t_complex	c;
-	int			(*algo)(int, int, t_complex);
+	int			(*algo)(t_env *env, int, int, t_complex);
 };
 
 t_env						*fractol_init();
@@ -71,11 +71,11 @@ struct						s_move
 	int			y;
 };
 
-int 						mandel(int x, int y, t_complex c);
-int 						julias(int x, int y, t_complex c);
-int 						burnin(int x, int y, t_complex c);
-int 						newton(int x, int y, t_complex c);
-int 						tripe(int x, int y, t_complex c);
+int 						mandel(t_env *env, int x, int y, t_complex c);
+int 						julias(t_env *env, int x, int y, t_complex c);
+int 						burnin(t_env *env, int x, int y, t_complex c);
+int 						newton(t_env *env, int x, int y, t_complex c);
+int 						tripe(t_env *env, int x, int y, t_complex c);
 
 int							fractol_color_scale(float count);
 int							color_add(int c1);

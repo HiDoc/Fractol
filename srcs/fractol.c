@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/21 18:14:23 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/22 17:54:33 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_env		*fractol_iter(t_env *env, int (algo)(int, int, t_complex))
 		x = 0;
 		while (x < WIN_X)
 		{
-			env->tab[pos] = algo(x, y, c);
+			env->tab[pos] = algo(env, x, y, c);
 			pos++;
 			x++;
 		}
