@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/26 18:02:21 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 21:20:10 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ int 		newton(t_env *env, double x, double y, t_complex c);
 int 		tripe(t_env *env, double x, double y, t_complex c);
 
 int			fractol_color_scale(t_env *env, float count, t_complex c);
-int			color_add(int c1);
+int			fractol_color_change(int color, int value);
 
 int			key_hook(int keycode, void *param);
 int			ft_strequ(const char *s1, const char *s2);
+
+t_hsv		rgb_to_hsv(double r, double g, double b);
+t_rgb		hsv_to_rgb(t_hsv hsv, t_rgb rgb);
 #endif

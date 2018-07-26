@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/26 19:12:06 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 21:32:13 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ static int	key_color(int keycode, t_env *env)
 			x = 0;
 			while (x < WIN_X)
 			{
-				env->tab[pos] = (env->tab[pos]);
+				env->tab[pos] = fractol_color_change(env->tab[pos], 10);
 				pos++;
 				x++;
 			}
 			y++;
 		}
+		print_color();
 		return (1);
 	}
 	return (0);

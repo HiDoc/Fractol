@@ -9,7 +9,7 @@ INC_PATH = ./includes/ \
 LIB = -L ./mlx -lmlx
 
 # SOURCES
-SRC_NAME = tmp.c \
+SRC_NAME = fractal.c \
 		   main.c \
 		   color.c \
 		   complex.c \
