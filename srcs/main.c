@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 13:38:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 19:01:58 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 19:28:50 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int mouse_move(int x, int y, t_env *env)
 	(void)env;
 	if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
 	{
-		env->c.x = (double)(x - 400) / (double)WIN_X * 2;	
-		env->c.y = (double)(y - 400)/ (double)WIN_Y * 2;	
+		env->c.x = (double)(x - 400) / (double)WIN_X * 8;
+		env->c.y = (double)(y - 400) / (double)WIN_Y * 8;
 	}
 	env = fractol_iter(env, env->algo);
 	mlx_clear_window(env->mlx, env->win);
@@ -30,25 +30,29 @@ static int mouse_move(int x, int y, t_env *env)
 int		main(int argc, char **argv)
 {
 	t_env	*env;
+	int		(*algo)(t_env *env, double, double, t_complex c);
 
 	if (argc > 1)
 	{
+		algo = NULL;
 		env = fractol_init();
 		if (ft_strequ(argv[1], "Julia"))
-			env->algo = &julias;
+			algo = &julias;
 		else if (ft_strequ(argv[1], "Mandelbrot"))
-			env->algo = &mandel;
+			algo = &mandel;
 		else if (ft_strequ(argv[1], "Burningship"))
-			env->algo = &burnin;
+			algo = &burnin;
 		else if (ft_strequ(argv[1], "Newton"))
-			env->algo = &newton;
+			algo = &newton;
 		else if (ft_strequ(argv[1], "Tripe"))
-			env->algo = &tripe;
-		else
+			algo = &tripe;
+		if (algo)
 		{
-			free(env);
-			return (0);
+			env = fractol_init();
+			env->algo = algo;
 		}
+		else
+			return (0);
 		env = fractol_iter(env, env->algo);
 		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 		mlx_key_hook(env->win, &key_hook, env);

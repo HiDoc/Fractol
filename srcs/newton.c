@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:25:54 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 18:06:07 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 17:04:49 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		newton(t_env *env, int x, int y, t_complex c)
 	{
 		z1.x = z0.x * z0.x * z0.x - (3 * z0.x * z0.y * z0.y) - d.x; 	
 		z1.y = (3 * z0.x * z0.x * z0.y) - z0.y * z0.y * z0.y - d.y;
-		if (c_mod(z1) > RADSQR)
-			return (fractol_color_scale(env, count));
+		if (c_abs(z1) > RADSQR)
+			return (fractol_color_scale(env, count, z1));
 		z0 = z1;
 		count++;
 	}
-	return (fractol_color_scale(env, count));
+	return (fractol_color_scale(env, count, z1));
 }

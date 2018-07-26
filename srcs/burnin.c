@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 18:10:43 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 17:04:19 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		burnin(t_env *env, int x, int y, t_complex c)
 	{	
 		z1.x = z0.x * z0.x - z0.y * z0.y + c.x;
 		z1.y = 2 * fabs(z0.x * z0.y) + c.y;
-		if (c_mod(z1) > RADSQR)
-			return (fractol_color_scale(env, count));
+		if (c_abs(z1) > RADSQR)
+			return (fractol_color_scale(env, count, z1));
 		z0 = z1;
 		count++;
 	}
-	return (fractol_color_scale(env, count));
+	return (fractol_color_scale(env, count, z1));
 }

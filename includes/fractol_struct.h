@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 18:59:22 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/26 18:03:34 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct						s_env
 	int			endian;
 	t_move		*move;
 	t_complex	c;
-	int			(*algo)(t_env *env, int, int, t_complex);
+	int			(*algo)(t_env *env, double, double, t_complex);
 };
 
 struct						s_move
