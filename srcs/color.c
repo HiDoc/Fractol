@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/26 21:32:21 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/29 21:24:33 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 {
-	int i;
-	double f;
-	double p;
-	double q;
-	double t;
+	int		i;
+	double	f;
+	double	p;
+	double	q;
+	double	t;
 
 	if (hsv.h == 360)
 		hsv.h = 0;
@@ -29,7 +29,6 @@ void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 	p = hsv.v * (1.0 - hsv.s);
 	q = hsv.v * (1.0 - (hsv.s * f));
 	t = hsv.v * (1.0 - (hsv.s * (1.0 - f)));
-
 	if (i == 0)
 	{
 		*r = hsv.v;
@@ -70,9 +69,9 @@ void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 
 t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
 {
-	double r;
-	double g;
-	double b;
+	double	r;
+	double	g;
+	double	b;
 
 	r = 0;
 	g = 0;
@@ -110,8 +109,8 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 	{
 		hsv.h = 0;
 		hsv.s = 0;
-	} 
-	else 
+	}
+	else
 	{
 		d = max - min;
 		hsv.s = (hsv.v > 0.5) ? d / (2 - max - min) : d / (max + min);
@@ -125,7 +124,8 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 	}
 	return (hsv);
 }
-int			fractol_color_change(int color, int value)
+
+int		fractol_color_change(int color, int value)
 {
 	t_hsv	hsv;
 	t_rgb	rgb;
@@ -144,11 +144,11 @@ int			fractol_color_change(int color, int value)
 	ret = 0;
 	hsv = rgb_to_hsv(r, g, b);
 	rgb = hsv_to_rgb(hsv, rgb);
- 	ret = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
+	ret = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
 	return (ret);
 }
 
-int			fractol_color_scale(t_env *env, float count, t_complex z)
+int		fractol_color_scale(t_env *env, float count, t_complex z)
 {
 	t_rgb	rgb;
 	t_hsv	hsv;
@@ -156,9 +156,9 @@ int			fractol_color_scale(t_env *env, float count, t_complex z)
 
 	(void)env;
 	(void)z;
-	hsv.h = count / MAXITER * 360;
+	hsv.h = (long)((count / MAXITER * 360) + 50) % 360;
 	hsv.s = 0.8;
-	hsv.v = 1.0; 
+	hsv.v = 1.0;
 	rgb.r = 0;
 	rgb.g = 0;
 	rgb.b = 0;

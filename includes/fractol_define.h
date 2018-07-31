@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:57:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/22 18:58:01 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/29 15:50:55 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FRACTOL_DEFINE_H
 # include "mlx.h"
 # include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
@@ -32,4 +33,10 @@
 # define RADSQR 4
 # define PIX_WDT 0.005
 # define PIX_HGT 0.005
+
+# define E_MLX env->mlx
+# define E_WIN env->win
+# define E_IMG env->img
+# define E_MOVX env->move->x
+# define E_MOVY env->move->y
 #endif

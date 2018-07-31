@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:00:33 by fmadura           #+#    #+#             */
-/*   Updated: 2018/06/01 16:08:08 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/29 15:57:00 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,15 @@ int		ft_strequ(char const *s1, char const *s2)
 		i++;
 	}
 	return (s1[i] == s2[i]);
+}
+
+int		ft_putstr(const char *s, int fd)
+{
+	if (s)
+	{
+		while (*s)
+			write(fd, s++, 1);
+		return (1);
+	}
+	return (0);
 }

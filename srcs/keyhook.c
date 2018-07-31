@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/26 21:32:13 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/07/29 16:36:59 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	key_move(int keycode, t_env *env)
 {
 	if (keycode == 123 || keycode == 124)
-		env->move->x += keycode == 123 ? 1 : - 1;
+		env->move->x += keycode == 123 ? 1 : -1;
 	else if (keycode == 125 || keycode == 126)
-		env->move->y += keycode == 125 ? 1 : - 1;
+		env->move->y += keycode == 125 ? 1 : -1;
 	else
 		return (0);
 	return (1);
@@ -39,6 +39,8 @@ static int	key_exit(int keycode, t_env *env)
 	{
 		mlx_clear_window(env->mlx, env->win);
 		mlx_destroy_window(env->mlx, env->win);
+		free(env->move);
+		free(env);
 		exit(0);
 	}
 	return (0);
@@ -65,7 +67,6 @@ static int	key_color(int keycode, t_env *env)
 			}
 			y++;
 		}
-		print_color();
 		return (1);
 	}
 	return (0);
@@ -85,7 +86,7 @@ int			key_hook(int keycode, void *param)
 	if (hooked)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, env->move->x, env->move->y);
+		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, E_MOVX, E_MOVY);
 	}
 	return (1);
 }

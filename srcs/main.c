@@ -1,33 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/09 13:38:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/26 20:39:20 by fmadura          ###   ########.fr       */
+/*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
+/*   Updated: 2018/07/31 22:15:00 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-static int mouse_move(int x, int y, t_env *env)
+static int	mouse_move(int x, int y, t_env *env)
 {
-	(void)env;
-	if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
+	if (env->algo == julias || env->algo == tripe || env->algo == newton)
 	{
-		env->c.x = (double)(x - 400) / (double)WIN_X * 8;
-		env->c.y = (double)(y - 400) / (double)WIN_Y * 8;
+		if (env->algo == julias || env->algo == tripe)
+		{
+			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
+			{
+				env->c.x = (double)(x - 400) / (double)WIN_X * 8;
+				env->c.y = (double)(y - 400) / (double)WIN_Y * 8;
+			}
+		}
+		else
+		{
+			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
+			{
+				env->c.x = (double)(x - 400) / (double)WIN_X * 2;
+				env->c.y = (double)(y - 400) / (double)WIN_Y * 2;
+			}
+		}
+		env = fractol_iter(env, env->algo);
+		mlx_clear_window(E_MLX, E_WIN);
+		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, E_MOVX, E_MOVY);
 	}
-	env = fractol_iter(env, env->algo);
-	mlx_clear_window(env->mlx, env->win);
-	mlx_put_image_to_window(env->mlx, env->win, env->img, env->move->x, env->move->y);
 	return (1);
 }
 
-int		main(int argc, char **argv)
+static int	usage(void)
+{
+	ft_putstr("usage: ./fractol fractal_name\n", 2);
+	ft_putstr("\tfractal_name: Burningship, Julia,", 2);
+	ft_putstr(" Mandelbrot, Newton, Tripe\n", 2);
+	return (0);
+}
+
+static void	launch(t_env *env)
+{
+	env = fractol_iter(env, env->algo);
+	mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);
+	mlx_key_hook(E_WIN, &key_hook, env);
+	mlx_hook(E_WIN, 6, 3, mouse_move, env);
+	mlx_loop(E_MLX);
+}
+
+int			main(int argc, char **argv)
 {
 	t_env	*env;
 	int		(*algo)(t_env *env, double, double, t_complex c);
@@ -35,7 +65,6 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 	{
 		algo = NULL;
-		env = fractol_init();
 		if (ft_strequ(argv[1], "Julia"))
 			algo = &julias;
 		else if (ft_strequ(argv[1], "Mandelbrot"))
@@ -46,18 +75,11 @@ int		main(int argc, char **argv)
 			algo = &newton;
 		else if (ft_strequ(argv[1], "Tripe"))
 			algo = &tripe;
-		if (algo)
-		{
-			env = fractol_init();
-			env->algo = algo;
-		}
-		else
-			return (0);
-		env = fractol_iter(env, env->algo);
-		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-		mlx_key_hook(env->win, &key_hook, env);
-		mlx_hook(env->win, 6, 3, mouse_move, env);
-		mlx_loop(env->mlx);
+		if (algo == NULL)
+			return (usage());
+		env = fractol_init();
+		env->algo = algo;
+		launch(env);
 	}
 	return (0);
 }
