@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/31 22:15:00 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/01 20:28:21 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static int	mouse_move(int x, int y, t_env *env)
 {
-	if (env->algo == julias || env->algo == tripe || env->algo == newton)
+	if (E_ALG == julias || E_ALG == tripe || E_ALG == newton)
 	{
-		if (env->algo == julias || env->algo == tripe)
+		if (E_ALG == julias || E_ALG == tripe)
 		{
 			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
 			{
@@ -33,7 +33,7 @@ static int	mouse_move(int x, int y, t_env *env)
 				env->c.y = (double)(y - 400) / (double)WIN_Y * 2;
 			}
 		}
-		env = fractol_iter(env, env->algo);
+		env = fractol_iter(env);
 		mlx_clear_window(E_MLX, E_WIN);
 		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, E_MOVX, E_MOVY);
 	}
@@ -50,7 +50,7 @@ static int	usage(void)
 
 static void	launch(t_env *env)
 {
-	env = fractol_iter(env, env->algo);
+	env = fractol_iter(env);
 	mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);
 	mlx_key_hook(E_WIN, &key_hook, env);
 	mlx_hook(E_WIN, 6, 3, mouse_move, env);
@@ -78,8 +78,8 @@ int			main(int argc, char **argv)
 		if (algo == NULL)
 			return (usage());
 		env = fractol_init();
-		env->algo = algo;
+		E_ALG = algo;
 		launch(env);
 	}
-	return (0);
+	return (usage());
 }

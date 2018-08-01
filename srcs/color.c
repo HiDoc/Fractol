@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/29 21:24:33 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/01 20:40:30 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 	double	q;
 	double	t;
 
-	if (hsv.h == 360)
-		hsv.h = 0;
-	else
-		hsv.h = hsv.h / 60;
 	i = (int)trunc(hsv.h);
 	f = hsv.h - i;
 	p = hsv.v * (1.0 - hsv.s);
@@ -76,14 +72,14 @@ t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
 	r = 0;
 	g = 0;
 	b = 0;
-	if (hsv.s == 0)
+	if (hsv.s != 0)
+		hsv_get_val(hsv, &r, &g, &b);
+	else
 	{
 		r = hsv.v;
 		g = hsv.v;
 		b = hsv.v;
 	}
-	else
-		hsv_get_val(hsv, &r, &g, &b);
 	rgb.r = r * 255;
 	rgb.g = g * 255;
 	rgb.b = b * 255;
@@ -97,54 +93,56 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 	double	d;
 	t_hsv	hsv;
 
-	r /= 255;
-	g /= 255;
-	b /= 255;
 	max = fmax(r, fmax(g, b));
 	min = fmin(r, fmin(g, b));
-	hsv.h = (max + min) / 2;
-	hsv.s = (max + min) / 2;
-	hsv.v = (max + min) / 2;
+	d = max - min;
+	hsv.v = max / 255;
 	if (max == min)
-	{
 		hsv.h = 0;
-		hsv.s = 0;
-	}
 	else
 	{
-		d = max - min;
-		hsv.s = (hsv.v > 0.5) ? d / (2 - max - min) : d / (max + min);
-		if (max == r)
-			hsv.h = (g - b) / d + (g < b ? 6 : 0);
-		else if (max == g)
-			hsv.h = (b - r) / d + 2;
-		else if (max == b)
-			hsv.h = (r - g) / d + 4;
-		hsv.h /= 6;
+		if (max == 0)
+			hsv.s = 0;
+		else
+		{
+			hsv.s = d / max;
+			if (max == r)
+				hsv.h = (((g - b) / d) * 6);
+			if (max == g)
+				hsv.h = (b - r) / d + 2;
+			if (max == b)
+				hsv.h = (r - g) / d + 4;
+		}
 	}
+	hsv.h = hsv.h / 6.0;
 	return (hsv);
 }
 
 int		fractol_color_change(int color, int value)
 {
-	t_hsv	hsv;
 	t_rgb	rgb;
+	t_hsv	hsv;
 	int		ret;
 	double	r;
 	double	g;
 	double	b;
 
 	(void)value;
-	r = ((double)(color >> 16));
-	g = ((double)(color >> 8));
-	b = ((double)color);
+	r = ((color >> 16) & 0xFF);
+	g = ((color >> 8) & 0xFF);
+	b = (color & 0xFF);
 	rgb.r = 0;
 	rgb.g = 0;
 	rgb.b = 0;
-	ret = 0;
+	hsv.h = 0;
+	hsv.s = 0;
+	hsv.v = 0;
 	hsv = rgb_to_hsv(r, g, b);
+	hsv.v = hsv.v - 0.1;
+	if (hsv.v < 0)
+		hsv.h = 1.0;
 	rgb = hsv_to_rgb(hsv, rgb);
-	ret = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
+	ret = ((rgb.r & 0xFF) << 16) + (((rgb.g & 0xFF) + 1) << 8) + (rgb.b & 0xFF);
 	return (ret);
 }
 
@@ -156,7 +154,8 @@ int		fractol_color_scale(t_env *env, float count, t_complex z)
 
 	(void)env;
 	(void)z;
-	hsv.h = (long)((count / MAXITER * 360) + 50) % 360;
+	hsv.h = (long)((count / MAXITER * 360));
+	hsv.h = hsv.h == 360 ? 0 : hsv.h / 60;
 	hsv.s = 0.8;
 	hsv.v = 1.0;
 	rgb.r = 0;

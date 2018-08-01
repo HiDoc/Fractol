@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/29 20:59:47 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/01 14:44:54 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_complex	c_sqr_abs(t_complex c);
 double		c_abs(t_complex c);
 
 t_env		*fractol_init();
-t_env		*fractol_iter(t_env *env, int (f)(t_env *, double, double, t_complex));
+t_env		*fractol_iter(t_env *env);
 
 int 		mandel(t_env *env, double x, double y, t_complex c);
 int 		julias(t_env *env, double x, double y, t_complex c);

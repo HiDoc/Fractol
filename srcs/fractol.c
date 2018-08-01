@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/29 20:47:27 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/01 14:51:18 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int		fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
 	return (fractol_color_scale(env, color, z1));
 }
 
-t_env		*fractol_iter(t_env *env, int (algo)(t_env *,
-			double, double, t_complex))
+t_env		*fractol_iter(t_env *env)
 {
 	double		x;
 	double		y;
@@ -47,7 +46,7 @@ t_env		*fractol_iter(t_env *env, int (algo)(t_env *,
 		x = 0;
 		while (x < WIN_X)
 		{
-			env->tab[pos] = algo(env, x, y, c);
+			env->tab[pos] = env->algo(env, x, y, c);
 			pos++;
 			x++;
 		}
@@ -73,10 +72,9 @@ t_env		*fractol_init(void)
 	move->x = 0;
 	move->y = 0;
 	env->move = move;
-	env->mlx = mlx_init();
-	env->win = mlx_new_window(env->mlx, WIN_X, WIN_Y, "Fractol");
-	env->img = mlx_new_image(env->mlx, WIN_X, WIN_Y);
-	env->tab = (int *)mlx_get_data_addr(env->img,
-			&(env->bpp), &(env->sl), &(env->endian));
+	E_MLX = mlx_init();
+	E_WIN = mlx_new_window(E_MLX, WIN_X, WIN_Y, "Fractol");
+	E_IMG = mlx_new_image(E_MLX, WIN_X, WIN_Y);
+	env->tab = (int *)mlx_get_data_addr(E_IMG, &(E_BPP), &(E_SL), &(E_END));
 	return (env);
 }
