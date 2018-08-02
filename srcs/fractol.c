@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/01 14:51:18 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:45:29 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
 		color += exp(-c_abs(z0));
 		count++;
 	}
-	return (fractol_color_scale(env, color, z1));
+	return (fractol_color_scale(env, color));
 }
 
 t_env		*fractol_iter(t_env *env)
@@ -72,6 +72,7 @@ t_env		*fractol_init(void)
 	move->x = 0;
 	move->y = 0;
 	env->move = move;
+	env->color_modify = 0;
 	E_MLX = mlx_init();
 	E_WIN = mlx_new_window(E_MLX, WIN_X, WIN_Y, "Fractol");
 	E_IMG = mlx_new_image(E_MLX, WIN_X, WIN_Y);

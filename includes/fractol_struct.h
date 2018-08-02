@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/01 14:45:02 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:08:00 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ struct						s_env
 	int			bpp;
 	int			sl;
 	int			endian;
+	double		color_modify;
 	t_move		*move;
 	t_complex	c;
 	int			(*algo)(t_env *env, double, double, t_complex);

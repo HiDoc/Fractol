@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/01 14:44:54 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 19:02:17 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int 		tripe(t_env *env, double x, double y, t_complex c);
 
 int			fractol_calc(t_env *env,t_complex (calc)(t_complex z0),
 			t_complex z0, t_complex c);
-int			fractol_color_scale(t_env *env, float count, t_complex c);
+int			fractol_color_scale(t_env *env, float count);
 int			fractol_color_change(int color, int value);
 
 int			key_hook(int keycode, void *param);

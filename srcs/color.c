@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/01 20:40:30 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:37:03 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
 		g = hsv.v;
 		b = hsv.v;
 	}
-	rgb.r = r * 255;
-	rgb.g = g * 255;
-	rgb.b = b * 255;
+	rgb.r = round(r * 255.0);
+	rgb.g = round(g * 255.0);
+	rgb.b = round(b * 255.0);
 	return (rgb);
 }
 
@@ -96,7 +96,7 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 	max = fmax(r, fmax(g, b));
 	min = fmin(r, fmin(g, b));
 	d = max - min;
-	hsv.v = max / 255;
+	hsv.v = max / 255.0;
 	if (max == min)
 		hsv.h = 0;
 	else
@@ -107,14 +107,13 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 		{
 			hsv.s = d / max;
 			if (max == r)
-				hsv.h = (((g - b) / d) * 6);
+				hsv.h = ((g - b) / d);
 			if (max == g)
 				hsv.h = (b - r) / d + 2;
 			if (max == b)
 				hsv.h = (r - g) / d + 4;
 		}
 	}
-	hsv.h = hsv.h / 6.0;
 	return (hsv);
 }
 
@@ -138,24 +137,22 @@ int		fractol_color_change(int color, int value)
 	hsv.s = 0;
 	hsv.v = 0;
 	hsv = rgb_to_hsv(r, g, b);
-	hsv.v = hsv.v - 0.1;
-	if (hsv.v < 0)
-		hsv.h = 1.0;
+	hsv.h += 1.0 / 36.0;
 	rgb = hsv_to_rgb(hsv, rgb);
-	ret = ((rgb.r & 0xFF) << 16) + (((rgb.g & 0xFF) + 1) << 8) + (rgb.b & 0xFF);
+	ret = ((rgb.r & 0xFF) << 16) + (((rgb.g & 0xFF)) << 8) + (rgb.b & 0xFF);
 	return (ret);
 }
 
-int		fractol_color_scale(t_env *env, float count, t_complex z)
+int		fractol_color_scale(t_env *env, float count)
 {
 	t_rgb	rgb;
 	t_hsv	hsv;
 	int		ret;
 
 	(void)env;
-	(void)z;
-	hsv.h = (long)((count / MAXITER * 360));
-	hsv.h = hsv.h == 360 ? 0 : hsv.h / 60;
+	hsv.h = count / (double)MAXITER * 360.0;
+	//hsv.h += env->color_modify;
+	hsv.h = hsv.h == 360 ? 0 : hsv.h / 60.0;
 	hsv.s = 0.8;
 	hsv.v = 1.0;
 	rgb.r = 0;

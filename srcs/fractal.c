@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:25:56 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/29 21:24:28 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:40:38 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		tripe(t_env *env, double x, double y, t_complex c)
 		color += exp(-c_abs(z0));
 		count++;
 	}
-	return (fractol_color_scale(env, color, z1));
+	return (fractol_color_scale(env, color));
 }
 
 int		newton(t_env *env, double x, double y, t_complex c)
