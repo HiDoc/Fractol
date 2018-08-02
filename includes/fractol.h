@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 19:02:17 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:58:45 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ double		c_abs(t_complex c);
 t_env		*fractol_init();
 t_env		*fractol_iter(t_env *env);
 
-int 		mandel(t_env *env, double x, double y, t_complex c);
-int 		julias(t_env *env, double x, double y, t_complex c);
-int 		burnin(t_env *env, double x, double y, t_complex c);
-int 		newton(t_env *env, double x, double y, t_complex c);
-int 		tripe(t_env *env, double x, double y, t_complex c);
+int			mandel(t_env *env, double x, double y, t_complex c);
+int			julias(t_env *env, double x, double y, t_complex c);
+int			burnin(t_env *env, double x, double y, t_complex c);
+int			newton(t_env *env, double x, double y, t_complex c);
+int			tripe(t_env *env, double x, double y, t_complex c);
 
-int			fractol_calc(t_env *env,t_complex (calc)(t_complex z0),
-			t_complex z0, t_complex c);
+int			fractol_calc(t_env *env, t_complex (calc)(t_complex z0), t_complex
+			z0, t_complex c);
 int			fractol_color_scale(t_env *env, float count);
 int			fractol_color_change(int color, int value);
 

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 20:45:29 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 21:05:47 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,35 @@ t_env		*fractol_iter(t_env *env)
 	int			pos;
 	t_complex	c;
 
-	y = 0;
+	y = Y_START;
 	pos = 0;
 	c = env->c;
-	while (y < WIN_Y)
+	while (y < Y_END)
 	{
-		x = 0;
-		while (x < WIN_X)
+		x = X_START;
+		while (x < X_END)
 		{
 			env->tab[pos] = env->algo(env, x, y, c);
 			pos++;
-			x++;
+			x += E_ZOOM;
 		}
-		y++;
+		y += E_ZOOM;
 	}
+	return (env);
+}
+
+static t_env	*set_zero(t_env *env)
+{
+	env->c.x = 0;
+	env->c.y = 0;
+	E_MOVX = 0;
+	E_MOVY = 0;
+	env->color_modify = 0;
+	E_ZOOM = 1;
+	X_START = 0;
+	Y_START = 0;
+	X_END = WIN_X;
+	Y_END = WIN_Y;
 	return (env);
 }
 
@@ -59,6 +74,7 @@ t_env		*fractol_init(void)
 {
 	t_env		*env;
 	t_move		*move;
+	t_win		*win;
 
 	if ((env = (t_env *)malloc(sizeof(t_env))) == NULL)
 		exit(0);
@@ -67,12 +83,15 @@ t_env		*fractol_init(void)
 		free(env);
 		exit(0);
 	}
-	env->c.x = 0;
-	env->c.y = 0;
-	move->x = 0;
-	move->y = 0;
+	if ((win = (t_win *)malloc(sizeof(t_win))) == NULL)
+	{
+		free(move);
+		free(env);
+		exit(0);
+	}
 	env->move = move;
-	env->color_modify = 0;
+	env->wind = win;
+	set_zero(env);
 	E_MLX = mlx_init();
 	E_WIN = mlx_new_window(E_MLX, WIN_X, WIN_Y, "Fractol");
 	E_IMG = mlx_new_image(E_MLX, WIN_X, WIN_Y);

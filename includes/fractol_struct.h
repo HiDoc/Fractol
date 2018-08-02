@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 20:08:00 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/02 20:59:36 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct s_env		t_env;
 typedef struct s_complex	t_complex;
 typedef struct s_move		t_move;
+typedef struct s_win		t_win;
 typedef struct s_rgb		t_rgb;
 typedef struct s_hsv		t_hsv;
 
@@ -23,6 +24,15 @@ struct						s_complex
 {
 	double x;
 	double y;
+};
+
+struct						s_win
+{
+	double		x_start;
+	double		y_start;
+	double		x_end;
+	double		y_end;
+	double		zoom;
 };
 
 struct						s_env
@@ -36,6 +46,7 @@ struct						s_env
 	int			endian;
 	double		color_modify;
 	t_move		*move;
+	t_win		*wind;
 	t_complex	c;
 	int			(*algo)(t_env *env, double, double, t_complex);
 };
@@ -46,7 +57,7 @@ struct						s_move
 	int			y;
 };
 
-struct 						s_rgb
+struct						s_rgb
 {
 	unsigned char r;
 	unsigned char g;
