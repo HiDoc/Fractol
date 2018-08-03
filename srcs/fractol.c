@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 21:05:47 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/03 16:53:13 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ t_env		*fractol_iter(t_env *env)
 	y = Y_START;
 	pos = 0;
 	c = env->c;
-	while (y < Y_END)
+	while (y < Y_END && pos < WIN_X * WIN_Y)
 	{
 		x = X_START;
-		while (x < X_END)
+		while (x < X_END && pos < WIN_X * WIN_Y)
 		{
 			env->tab[pos] = env->algo(env, x, y, c);
 			pos++;
@@ -63,6 +63,7 @@ static t_env	*set_zero(t_env *env)
 	E_MOVY = 0;
 	env->color_modify = 0;
 	E_ZOOM = 1;
+	E_PAD = 200;
 	X_START = 0;
 	Y_START = 0;
 	X_END = WIN_X;

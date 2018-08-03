@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 21:11:45 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/03 16:53:11 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int			key_zoom(int keycode, t_env *env)
 {
 	if (keycode == 69 || keycode == 78)
 	{
-		X_START = X_START + (X_END - X_START) / 4;
-		Y_START = Y_START + (Y_END - Y_START) / 4;
-		X_END = X_END - X_START;
-		Y_END = Y_END - Y_START;
-		E_ZOOM = E_ZOOM / 2.0;
+		X_START += E_PAD;
+		Y_START += E_PAD;
+		X_END -= E_PAD;
+		Y_END -= E_PAD;
+		E_PAD /= 2.0;
+		E_ZOOM /= 2.0;
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:57:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 20:59:44 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/03 16:51:05 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define E_WIN	env->win
 
 # define E_ZOOM		env->wind->zoom
+# define E_PAD		env->wind->pad
 # define X_START	env->wind->x_start
 # define Y_START	env->wind->y_start
 # define X_END		env->wind->x_end
