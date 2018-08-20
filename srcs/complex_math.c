@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:11:39 by fmadura           #+#    #+#             */
-/*   Updated: 2018/07/29 21:22:48 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/20 14:10:43 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_complex	c_cube(t_complex a)
 	xx = a.x * a.x;
 	yy = a.y * a.y;
 	c.x = xx * a.x - (3 * a.x * yy);
-	c.y = (3 * xx * a.y) - yy * a.y;	
+	c.y = (3 * xx * a.y) - yy * a.y;
 	return (c);
 }
 

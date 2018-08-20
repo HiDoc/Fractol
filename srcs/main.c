@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/02 20:32:39 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/20 13:39:32 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	mouse_move(int x, int y, t_env *env)
 		{
 			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
 			{
-				env->c.x = (double)(x - 400) / (double)WIN_X * 8;
-				env->c.y = (double)(y - 400) / (double)WIN_Y * 8;
+				env->c.x = (((double)x - 400.0) / (double)WIN_X) * 8.0 * E_ZOOM;
+				env->c.y = (((double)y - 400.0) / (double)WIN_Y) * 8.0 * E_ZOOM;
 			}
 		}
 		else

@@ -70,4 +70,5 @@ fclean : clean
 re : fclean all
 
 run : all 
+	@clear
 	./fractol Julia

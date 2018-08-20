@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/03 16:53:11 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/20 12:36:41 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ int			key_zoom(int keycode, t_env *env)
 {
 	if (keycode == 69 || keycode == 78)
 	{
-		X_START += E_PAD;
-		Y_START += E_PAD;
-		X_END -= E_PAD;
-		Y_END -= E_PAD;
-		E_PAD /= 2.0;
-		E_ZOOM /= 2.0;
+		E_PAD /= (keycode == 69 ? 1.0 : 0.5);
+		X_START += E_PAD * (keycode == 69 ? 1.0 : -1.0);
+		Y_START += E_PAD * (keycode == 69 ? 1.0 : -1.0);
+		X_END -= E_PAD * (keycode == 69 ? 1.0 : -1.0);
+		Y_END -= E_PAD * (keycode == 69 ? 1.0 : -1.0);
+		E_PAD /= (keycode == 69 ? 2.0 : 1.0);
+		E_ZOOM /= (keycode == 69 ? 2.0 : 0.5);
+		env = fractol_iter(env);
 		return (1);
 	}
 	return (0);
