@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyhook.c                                          :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/20 14:17:44 by fmadura          ###   ########.fr       */
+/*   Created: 2018/08/21 17:37:02 by fmadura           #+#    #+#             */
+/*   Updated: 2018/08/21 17:37:03 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			key_zoom(int keycode, t_env *env)
 		Y_END -= E_PAD * (keycode == 69 ? 1.0 : -1.0);
 		E_PAD /= (keycode == 69 ? 2.0 : 1.0);
 		E_ZOOM /= (keycode == 69 ? 2.0 : 0.5);
-		env = fractol_iter(env);
+		init_thread(env);
 		return (1);
 	}
 	return (0);
@@ -47,6 +47,7 @@ static int	key_exit(int keycode, t_env *env)
 		mlx_clear_window(env->mlx, env->win);
 		mlx_destroy_window(env->mlx, env->win);
 		free(env->move);
+		free(env->wind);
 		free(env);
 		exit(0);
 	}
@@ -63,12 +64,15 @@ static int	key_color(int keycode, t_env *env)
 	y = 0;
 	if (keycode == 13)
 	{
+		env->color_modify += 1.0;
+		if (env->color_modify > 360)
+			env->color_modify = 0;
 		while (y < WIN_Y)
 		{
 			x = 0;
 			while (x < WIN_X)
 			{
-				env->tab[pos] = fractol_color_change(env->tab[pos], 10);
+				env->tab[pos] = fractol_color_change(env->tab[pos], 1.0 / 36.0);
 				pos++;
 				x++;
 			}
@@ -90,6 +94,7 @@ int			key_hook(int keycode, void *param)
 	hooked += key_zoom(keycode, env);
 	hooked += key_color(keycode, env);
 	hooked += key_exit(keycode, env);
+	hooked += key_hookbis(keycode, env);
 	if (hooked)
 	{
 		mlx_clear_window(env->mlx, env->win);

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:57:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/03 16:51:05 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 15:27:02 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <unistd.h>
+# include <pthread.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
@@ -51,4 +52,9 @@
 # define Y_START	env->wind->y_start
 # define X_END		env->wind->x_end
 # define Y_END		env->wind->y_end
+
+#define T_TH1		env->t1.thread
+#define T_TH2		env->t2.thread
+#define T_TH3		env->t3.thread
+#define T_TH4		env->t4.thread
 #endif

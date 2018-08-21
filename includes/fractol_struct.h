@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 13:37:45 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 15:46:00 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_STRUCT_H
 
 typedef struct s_env		t_env;
+typedef struct s_thr		t_thread;
 typedef struct s_complex	t_complex;
 typedef struct s_move		t_move;
 typedef struct s_win		t_win;
@@ -36,6 +37,13 @@ struct						s_win
 	double		zoom;
 };
 
+struct						s_thr
+{
+	int			nbr;
+	t_env		*env;
+	pthread_t	thread;
+};
+
 struct						s_env
 {
 	long		flag;
@@ -49,6 +57,11 @@ struct						s_env
 	double		color_modify;
 	t_move		*move;
 	t_win		*wind;
+	int			tnbr;
+	t_thread	t1;
+	t_thread	t2;
+	t_thread	t3;
+	t_thread	t4;
 	t_complex	c;
 	int			(*algo)(t_env *env, double, double, t_complex);
 };

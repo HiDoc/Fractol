@@ -6,39 +6,12 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 13:36:00 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 17:37:40 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
-
-static int	mouse_move(int x, int y, t_env *env)
-{
-	if (E_ALG == julias || E_ALG == tripe || E_ALG == newton)
-	{
-		if (E_ALG == julias || E_ALG == tripe)
-		{
-			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
-			{
-				env->c.x = (((double)x - 400.0) / (double)WIN_X) * 8.0 * E_ZOOM;
-				env->c.y = (((double)y - 400.0) / (double)WIN_Y) * 8.0 * E_ZOOM;
-			}
-		}
-		else
-		{
-			if (x > 0 && x <= WIN_X && y >= 0 && y <= WIN_Y)
-			{
-				env->c.x = (double)(x - 400) / (double)WIN_X * 2;
-				env->c.y = (double)(y - 400) / (double)WIN_Y * 2;
-			}
-		}
-		env = fractol_iter(env);
-		mlx_clear_window(E_MLX, E_WIN);
-		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, E_MOVX, E_MOVY);
-	}
-	return (1);
-}
 
 static int	usage(void)
 {
@@ -50,7 +23,7 @@ static int	usage(void)
 
 static void	launch(t_env *env)
 {
-	env = fractol_iter(env);
+	init_thread(env);
 	mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);
 	mlx_key_hook(E_WIN, &key_hook, env);
 	mlx_hook(E_WIN, 6, 3, mouse_move, env);

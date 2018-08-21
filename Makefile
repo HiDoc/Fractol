@@ -6,20 +6,20 @@ CFLAGS		= -Wall -Werror -Wextra
 # INCLUDES
 INC_PATH	= ./includes/ \
 			  ./mlx/ \
-			  ../fdf/includes \
-			  ../fdf/libft/includes
 
 LIB			= -L ./mlx -lmlx \
-			  -L ../fdf/ -lfdf \
-			  -L ../fdf/libft/ -lftprintf
+			  -lpthread
 
 # SOURCES
 SRC_NAME	= fractal.c \
 			  main.c \
 			  color.c \
-			  complex.c \
-			  keyhook.c \
+			  complex_util.c \
+			  complex_math.c \
+			  hook.c \
+			  hook_bis.c \
 			  str_utils.c \
+			  thread.c \
 			  fractol.c
 
 SRC_PATH	= ./srcs/

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/14 16:16:25 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 17:44:32 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,30 @@ void	hsv_get_val(t_hsv hsv, double *r, double *g, double *b)
 	p = hsv.v * (1.0 - hsv.s);
 	q = hsv.v * (1.0 - (hsv.s * f));
 	t = hsv.v * (1.0 - (hsv.s * (1.0 - f)));
+	if (i == 0 || i == 1)
+		*b = p;
+	if (i == 1 || i == 2)
+		*g = hsv.v;
+	if (i == 2 || i == 3)
+		*r = p;
+	if (i == 3 || i == 4)
+		*b = hsv.v;
+	if (i == 4 || i >= 5)
+		*g = p;
+	if (i == 0 || i >= 5)
+		*r = hsv.v;
 	if (i == 0)
-	{
-		*r = hsv.v;
 		*g = t;
-		*b = p;
-	}
 	else if (i == 1)
-	{
 		*r = q;
-		*g = hsv.v;
-		*b = p;
-	}
 	else if (i == 2)
-	{
-		*r = p;
-		*g = hsv.v;
 		*b = t;
-	}
 	else if (i == 3)
-	{
-		*r = p;
 		*g = q;
-		*b = hsv.v;
-	}
 	else if (i == 4)
-	{
 		*r = t;
-		*g = p;
-		*b = hsv.v;
-	}
 	else
-	{
-		*r = hsv.v;
-		*g = p;
 		*b = q;
-	}
 }
 
 t_rgb	hsv_to_rgb(t_hsv hsv, t_rgb rgb)
@@ -117,7 +105,7 @@ t_hsv	rgb_to_hsv(double r, double g, double b)
 	return (hsv);
 }
 
-int		fractol_color_change(int color, int value)
+int		fractol_color_change(int color, double value)
 {
 	t_rgb	rgb;
 	t_hsv	hsv;
@@ -137,7 +125,7 @@ int		fractol_color_change(int color, int value)
 	hsv.s = 0;
 	hsv.v = 0;
 	hsv = rgb_to_hsv(r, g, b);
-	hsv.h += 1.0 / 36.0;
+	hsv.h += value;
 	rgb = hsv_to_rgb(hsv, rgb);
 	ret = ((rgb.r & 0xFF) << 16) + (((rgb.g & 0xFF)) << 8) + (rgb.b & 0xFF);
 	return (ret);
@@ -149,16 +137,15 @@ int		fractol_color_scale(t_env *env, float count)
 	t_hsv	hsv;
 	int		ret;
 
-	(void)env;
 	hsv.h = count / (double)MAXITER * 360.0;
-	//hsv.h += env->color_modify;
-	hsv.h = hsv.h == 360 ? 0 : hsv.h / 60.0;
-	hsv.s = 0.8;
+	hsv.h += env->color_modify;
+	hsv.h =  hsv.h / 60.0;
+	hsv.s = 0.80;
 	hsv.v = 1.0;
 	rgb.r = 0;
 	rgb.g = 0;
 	rgb.b = 0;
 	rgb = hsv_to_rgb(hsv, rgb);
 	ret = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
-	return (ret);
+	return (fractol_color_change(ret, 0.0));
 }
