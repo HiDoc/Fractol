@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/20 13:39:32 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 13:36:00 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	mouse_move(int x, int y, t_env *env)
 
 static int	usage(void)
 {
-	ft_putstr("usage: ./fractol fractal_name\n", 2);
-	ft_putstr("\tfractal_name: Burningship, Julia,", 2);
-	ft_putstr(" Mandelbrot, Newton, Tripe\n", 2);
+	printf("usage: ./fractol fractal_name\n");
+	printf("\tfractal_name: Burningship, Julia,");
+	printf(" Mandelbrot, Newton, Tripe\n");
 	return (0);
 }
 

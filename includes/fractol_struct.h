@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/03 16:50:32 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 13:37:45 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct						s_win
 
 struct						s_env
 {
+	long		flag;
 	void		*mlx;
 	void		*win;
 	void		*img;

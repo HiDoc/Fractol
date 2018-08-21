@@ -6,11 +6,32 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/20 12:46:39 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/21 13:38:04 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		fractol_calc_sec(t_env *env, t_complex (calc)(t_complex z0),
+		t_complex z0, t_complex c)
+{
+	int			count;
+	double		color;
+	t_complex	z1;
+	t_complex	z2;
+
+	z2 = z0;
+	color = exp(-c_abs(z0));
+	count = 0;
+	while (count < MAXITER && (!count || c_abs(z1) < RADSQR))
+	{
+		z1 = c_add(calc(z0), c);
+		z0 = z1;
+		color += exp(-c_abs(z2));
+		count++;
+	}
+	return (fractol_color_scale(env, color));
+}
 
 int		fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
 		t_complex z0, t_complex c)
@@ -57,6 +78,7 @@ t_env		*fractol_iter(t_env *env)
 
 static t_env	*set_zero(t_env *env)
 {
+	env->flag = 0;
 	env->c.x = 0;
 	env->c.y = 0;
 	E_MOVX = 0;

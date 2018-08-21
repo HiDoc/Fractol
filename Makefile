@@ -5,8 +5,13 @@ CFLAGS		= -Wall -Werror -Wextra
 
 # INCLUDES
 INC_PATH	= ./includes/ \
-			  ./mlx/
-LIB			= -L ./mlx -lmlx
+			  ./mlx/ \
+			  ../fdf/includes \
+			  ../fdf/libft/includes
+
+LIB			= -L ./mlx -lmlx \
+			  -L ../fdf/ -lfdf \
+			  -L ../fdf/libft/ -lftprintf
 
 # SOURCES
 SRC_NAME	= fractal.c \

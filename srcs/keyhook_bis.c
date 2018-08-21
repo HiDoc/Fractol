@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/01 16:00:33 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/20 17:12:49 by fmadura          ###   ########.fr       */
+/*   Created: 2018/05/19 18:00:03 by fmadura           #+#    #+#             */
+/*   Updated: 2018/08/20 15:19:53 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+int			key_hookbis(int keycode, void *param)
 {
-	size_t		i;
+	t_env	*env;
+	int		hooked;
 
-	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	env = param;
+	hooked = 0;
+	if (keycode == 1)
 		return (0);
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (s1[i] == s2[i]);
+	return (hooked);
 }

@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/01 16:00:33 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/20 17:12:49 by fmadura          ###   ########.fr       */
+/*   Created: 2018/08/20 16:20:26 by fmadura           #+#    #+#             */
+/*   Updated: 2018/08/20 17:22:32 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-
-int		ft_strequ(char const *s1, char const *s2)
+void	fdf(t_env *env)
 {
-	size_t		i;
-
-	i = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (s1[i] == s2[i]);
+	fdf_draw(env);
 }

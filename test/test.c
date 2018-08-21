@@ -21,11 +21,20 @@ void *thread_2(void *arg)
 	pthread_exit(NULL);
 }
 
+void *thread_3(void *arg)
+{
+	printf("Nous sommes dans le thread 3\n");
+
+	/* Pour enlever le warning */
+	(void) arg;
+	pthread_exit(NULL);
+}
 
 int main(void)
 {
 	pthread_t thread1;
 	pthread_t thread2;
+	pthread_t thread3;
 
 	printf("Avant la création du thread.\n");
 
@@ -45,6 +54,16 @@ int main(void)
 	}
 
 	if (pthread_join(thread2, NULL)) {
+		perror("pthread_join");
+		return EXIT_FAILURE;
+	}
+
+	if (pthread_create(&thread3, NULL, thread_3, NULL)) {
+		perror("pthread_create");
+		return EXIT_FAILURE;
+	}
+
+	if (pthread_join(thread3, NULL)) {
 		perror("pthread_join");
 		return EXIT_FAILURE;
 	}
