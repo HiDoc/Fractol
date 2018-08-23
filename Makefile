@@ -6,6 +6,7 @@ CFLAGS		= -Wall -Werror -Wextra
 # INCLUDES
 INC_PATH	= ./includes/ \
 			  ./mlx/ \
+			  /System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
 
 LIB			= -L ./mlx -lmlx \
 			  -lpthread
@@ -16,6 +17,7 @@ SRC_NAME	= fractal.c \
 			  color.c \
 			  complex_util.c \
 			  complex_math.c \
+			  struct_utils.c \
 			  hook.c \
 			  hook_bis.c \
 			  str_utils.c \

@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 17:37:02 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 17:37:03 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/23 19:51:15 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 static int	key_move(int keycode, t_env *env)
 {
 	if (keycode == 123 || keycode == 124)
-		env->move->x += keycode == 123 ? 1 : -1;
+	{
+		X_START += (keycode == 123 ? 10.0 : -10.0) * E_ZOOM;
+		X_END += (keycode == 123 ? 10.0 : -10.0) * E_ZOOM;
+	}
 	else if (keycode == 125 || keycode == 126)
-		env->move->y += keycode == 125 ? 1 : -1;
+	{
+		Y_START -= (keycode == 125 ? 10.0 : -10.0) * E_ZOOM;
+		Y_END -= (keycode == 125 ? 10.0 : -10.0) * E_ZOOM;
+	}
 	else
 		return (0);
+	init_thread(env);
 	return (1);
 }
 
@@ -40,7 +47,7 @@ int			key_zoom(int keycode, t_env *env)
 	return (0);
 }
 
-static int	key_exit(int keycode, t_env *env)
+int			key_exit(int keycode, t_env *env)
 {
 	if (keycode == 53)
 	{
@@ -56,28 +63,12 @@ static int	key_exit(int keycode, t_env *env)
 
 static int	key_color(int keycode, t_env *env)
 {
-	int x;
-	int y;
-	int pos;
-
-	pos = 0;
-	y = 0;
 	if (keycode == 13)
 	{
-		env->color_modify += 1.0;
-		if (env->color_modify > 360)
-			env->color_modify = 0;
-		while (y < WIN_Y)
-		{
-			x = 0;
-			while (x < WIN_X)
-			{
-				env->tab[pos] = fractol_color_change(env->tab[pos], 1.0 / 36.0);
-				pos++;
-				x++;
-			}
-			y++;
-		}
+		env->color_modify += 10.0;
+		if (env->color_modify > 360.0)
+			env->color_modify = 0.0;
+		init_thread(env);
 		return (1);
 	}
 	return (0);
@@ -98,7 +89,7 @@ int			key_hook(int keycode, void *param)
 	if (hooked)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, E_MOVX, E_MOVY);
+		mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);
 	}
 	return (1);
 }

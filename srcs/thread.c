@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 13:46:55 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 17:35:48 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/23 19:49:43 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_env		*fractol_thread(t_env *env, int start, int end)
+t_env	*fractol_thread(t_env *env, int start, int end)
 {
 	double		x;
 	double		y;
@@ -36,7 +36,7 @@ t_env		*fractol_thread(t_env *env, int start, int end)
 	return (env);
 }
 
-void *launch_thread(void *arg)
+void	*launch_thread(void *arg)
 {
 	t_thread	*tmp;
 	int			res;
@@ -66,48 +66,24 @@ void	set_thread(t_env *env)
 	env->t4.nbr = 4;
 }
 
-int init_thread(t_env *env)
+int		init_thread(t_env *env)
 {
 	set_thread(env);
 	if (pthread_create(&T_TH1, NULL, launch_thread, &(env->t1)))
-	{
-		perror("pthread_create");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_create(&T_TH2, NULL, launch_thread, &(env->t2)))
-	{
-		perror("pthread_create");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_create(&T_TH3, NULL, launch_thread, &(env->t3)))
-	{
-		perror("pthread_create");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_create(&T_TH4, NULL, launch_thread, &(env->t4)))
-	{
-		perror("pthread_create");
-		return EXIT_FAILURE;
-	}	
+		return (key_exit(53, env));
 	if (pthread_join(T_TH1, NULL))
-	{
-		perror("pthread_join");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_join(T_TH2, NULL))
-	{
-		perror("pthread_join");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_join(T_TH3, NULL))
-	{
-		perror("pthread_join");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	if (pthread_join(T_TH4, NULL))
-	{
-		perror("pthread_join");
-		return EXIT_FAILURE;
-	}
+		return (key_exit(53, env));
 	return (0);
 }

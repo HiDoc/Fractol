@@ -6,14 +6,14 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:57:44 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 14:37:48 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/23 20:06:18 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		fractol_calc_sec(t_env *env, t_complex (calc)(t_complex z0),
-		t_complex z0, t_complex c)
+int				fractol_calc_sec(t_env *env, t_complex (calc)(t_complex z0),
+				t_complex z0, t_complex c)
 {
 	int			count;
 	double		color;
@@ -30,11 +30,11 @@ int		fractol_calc_sec(t_env *env, t_complex (calc)(t_complex z0),
 		color += exp(-c_abs(z2));
 		count++;
 	}
-	return (fractol_color_scale(env, color));
+	return (E_ALGC(env, color));
 }
 
-int		fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
-		t_complex z0, t_complex c)
+int				fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
+				t_complex z0, t_complex c)
 {
 	int			count;
 	double		color;
@@ -49,31 +49,7 @@ int		fractol_calc(t_env *env, t_complex (calc)(t_complex z0),
 		color += exp(-c_abs(z0));
 		count++;
 	}
-	return (fractol_color_scale(env, color));
-}
-
-t_env		*fractol_iter(t_env *env)
-{
-	double		x;
-	double		y;
-	int			pos;
-	t_complex	c;
-
-	y = Y_START;
-	pos = 0;
-	c = env->c;
-	while (y < Y_END && pos < WIN_X * WIN_Y)
-	{
-		x = X_START;
-		while (x < X_END && pos < WIN_X * WIN_Y)
-		{
-			env->tab[pos] = env->algo(env, x, y, c);
-			pos++;
-			x += E_ZOOM;
-		}
-		y += E_ZOOM;
-	}
-	return (env);
+	return (E_ALGC(env, color));
 }
 
 static t_env	*set_zero(t_env *env)
@@ -84,8 +60,11 @@ static t_env	*set_zero(t_env *env)
 	E_MOVX = 0;
 	E_MOVY = 0;
 	env->color_modify = 0;
+	env->maxiter = 30;
 	E_ZOOM = 1;
 	E_PAD = 200;
+	E_ALGC = &fractol_color_scale;
+	E_ALGL = &fractol_calc;
 	X_START = 0;
 	Y_START = 0;
 	X_END = WIN_X;
@@ -93,7 +72,7 @@ static t_env	*set_zero(t_env *env)
 	return (env);
 }
 
-t_env		*fractol_init(void)
+t_env			*fractol_init(void)
 {
 	t_env		*env;
 	t_move		*move;

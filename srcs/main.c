@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 17:37:40 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/23 19:49:48 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ static int	usage(void)
 static void	launch(t_env *env)
 {
 	init_thread(env);
+	mlx_do_key_autorepeaton(E_MLX);
 	mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);
-	mlx_key_hook(E_WIN, &key_hook, env);
 	mlx_hook(E_WIN, 6, 3, mouse_move, env);
+	mlx_mouse_hook(E_WIN, mouse_zoom, env);
+	mlx_hook(E_WIN, KeyPress, KeyPressMask, &key_hook, env);
 	mlx_loop(E_MLX);
 }
 

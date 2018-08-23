@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:57:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/21 15:27:02 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/23 19:53:27 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 # include <math.h>
 
-# define MAXITER 30
+# define MAXITER env->maxiter
 
 # define WIN_X 800
 # define WIN_Y 800
@@ -36,6 +36,8 @@
 # define PIX_HGT 0.005
 
 # define E_ALG	env->algo
+# define E_ALGC	env->algocolor
+# define E_ALGL	env->algocalc
 # define E_BPP	env->bpp
 # define E_END	env->endian
 # define E_IMG	env->img
@@ -52,9 +54,11 @@
 # define Y_START	env->wind->y_start
 # define X_END		env->wind->x_end
 # define Y_END		env->wind->y_end
+# define X_CENTER	(X_START + X_END) / 2
+# define Y_CENTER	(Y_START + Y_END) / 2
 
-#define T_TH1		env->t1.thread
-#define T_TH2		env->t2.thread
-#define T_TH3		env->t3.thread
-#define T_TH4		env->t4.thread
+# define T_TH1		env->t1.thread
+# define T_TH2		env->t2.thread
+# define T_TH3		env->t3.thread
+# define T_TH4		env->t4.thread
 #endif
