@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:22:45 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:53:49 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 15:12:18 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_complex	c_sqr_abs(t_complex c);
 double		c_abs(t_complex c);
 
 t_env		*fractol_init();
+t_env		*set_zero(t_env *env);
 
 int			mandel(t_env *env, double x, double y, t_complex c);
 int			julias(t_env *env, double x, double y, t_complex c);
@@ -35,8 +36,11 @@ int			fractol_calc(t_env *env, t_complex (calc)(t_complex z0), t_complex
 			z0, t_complex c);
 int			fractol_calc_sec(t_env *env, t_complex (calc)(t_complex z0),
 			t_complex z0, t_complex c);
+int			fractol_calc_tri(t_env *env, t_complex (calc)(t_complex z0),
+			t_complex z0, t_complex c);
 
 int			fractol_color_scale(t_env *env, float count);
+int			fractol_color_palet(t_env *env, float count);
 int			fractol_color_bichro(t_env *env, float count);
 int			fractol_color_change(int color, double value);
 

@@ -6,11 +6,22 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:42:04 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:12:13 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 15:13:59 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		fractol_color_palet(t_env *env, float count)
+{
+	double		color;
+	const int	p[6] =
+	{0x0, 0xA3B18A, 0x588157, 0x3A5A40, 0x344E41, 0x0};
+
+	color = count / MAXITER * 6;
+	color = color > 5 ? 0 : color;
+	return (p[(int)color]);
+}
 
 int		fractol_color_bichro(t_env *env, float count)
 {

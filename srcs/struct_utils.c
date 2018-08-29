@@ -6,13 +6,13 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 17:36:21 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:52:59 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 14:36:05 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_ptr_swap(t_env *env, int which)
+int			ft_ptr_swap(t_env *env, int which)
 {
 	if (which == 1)
 	{
@@ -27,6 +27,11 @@ int		ft_ptr_swap(t_env *env, int which)
 			E_ALGC = &fractol_color_bichro;
 		else
 			E_ALGC = &fractol_color_scale;
+	}
+	if (which == 3)
+	{
+		E_ALGL = &fractol_calc_tri;
+		E_ALGC = &fractol_color_palet;
 	}
 	return (1);
 }

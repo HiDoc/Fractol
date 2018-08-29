@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:11:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:49:32 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 14:59:10 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ struct						s_env
 	t_thread	t4;
 	t_complex	c;
 	int			(*algo)(t_env *env, double, double, t_complex);
-	int			(*algocalc)(t_env *env, t_complex (calc)(t_complex), t_complex, t_complex);
+	int			(*algocalc)(t_env *env, t_complex (calc)(t_complex), t_complex,
+				t_complex);
 	int			(*algocolor)(t_env *env, float);
 };
 

@@ -6,23 +6,51 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 22:14:59 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:49:48 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 14:36:46 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
+static int	pstr(char *str)
+{
+	while (*str)
+	{
+		write(1, str, 1);
+		++str;
+	}
+	return (1);
+}
+
+static int	cmd(void)
+{
+	pstr("!     : Julia\n");
+	pstr("@     : Mandelbrot\n");
+	pstr("#     : Newton\n");
+	pstr("$     : Tricorne\n");
+	pstr("%     : Burningship\n");
+	pstr("^     : Bichromoatic color\n");
+	pstr("&     : Change color algorithmics\n");
+	pstr("w     : Change colorr\n");
+	pstr("move  : up, down, left, right\n");
+	pstr("zoom  : mousewheel or + -\n");
+	pstr("o     : iteration +\n");
+	pstr("p     : iteration -\n");
+	return (1);
+}
+
 static int	usage(void)
 {
-	printf("usage: ./fractol fractal_name\n");
-	printf("\tfractal_name: Burningship, Julia,");
-	printf(" Mandelbrot, Newton, Tripe\n");
+	pstr("usage: ./fractol fractal_name\n");
+	pstr("\tfractal_name: Burningship, Julia,");
+	pstr(" Mandelbrot, Newton, Tripe\n");
 	return (0);
 }
 
 static void	launch(t_env *env)
 {
+	cmd();
 	init_thread(env);
 	mlx_do_key_autorepeaton(E_MLX);
 	mlx_put_image_to_window(E_MLX, E_WIN, E_IMG, 0, 0);

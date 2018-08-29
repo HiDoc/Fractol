@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:57:46 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:53:27 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/28 18:13:03 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@
 # define Y_START	env->wind->y_start
 # define X_END		env->wind->x_end
 # define Y_END		env->wind->y_end
-# define X_CENTER	(X_START + X_END) / 2
-# define Y_CENTER	(Y_START + Y_END) / 2
 
 # define T_TH1		env->t1.thread
 # define T_TH2		env->t2.thread

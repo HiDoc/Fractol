@@ -6,7 +6,7 @@
 /*   By: fmadura <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 17:37:02 by fmadura           #+#    #+#             */
-/*   Updated: 2018/08/23 19:51:15 by fmadura          ###   ########.fr       */
+/*   Updated: 2018/08/29 15:12:27 by fmadura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ int			key_hook(int keycode, void *param)
 
 	env = param;
 	hooked = 0;
+	if (keycode == 49)
+		env->flag = env->flag ^ 1;
+	keycode == 15 ? set_zero(env): 0;
 	hooked += key_move(keycode, env);
 	hooked += key_zoom(keycode, env);
 	hooked += key_color(keycode, env);
