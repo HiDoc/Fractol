@@ -1,12 +1,18 @@
 NAME		= fractol
 
-CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
+UNAME = $(shell uname)
 
+ifeq ($(UNAME), Linux)	
+CC		:= clang -std=c99
+else
+CC		:= gcc
+endif
 # INCLUDES
 INC_PATH	= ./includes/ \
-			  ./mlx/ \
-			  /System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/
+		./mlx/includes/ \
+		/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/ \
+		/usr/include/X11/
 
 LIB			= -L ./mlx -lmlx \
 			  -lpthread
@@ -45,7 +51,7 @@ GREEN		= "\\033[32m"
 BOLD		= "\\033[1m"
 PINK		= "\\033[95m"
 
-OK			= $(CYAN)OK$(WHITE)
+OK		= $(CYAN)OK$(WHITE)
 WAIT		= $(RED)WAIT$(WHITE)
 
 .PHONY : all clean fclean re
@@ -54,8 +60,11 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) 
 	@printf "\rCompiling project $(WAIT)"
-	@$(CC) $(CFLAGS) $(OBJ) $(INC) -framework OpenGL -framework AppKit -o \
-		$(NAME) $(LIB)
+ifeq ($(UNAME), Linux)	
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) -L/usr/x86_64-linux-gnu -lX11 -lXext -lm -lpthread -o $(NAME) $(LIB)
+else
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) -framework OpenGL -framework AppKit -o $(NAME) $(LIB)
+endif
 	@printf "\rCompiling project $(OK)   \n"
  
 $(OBJ) : | $(OBJ_PATH)

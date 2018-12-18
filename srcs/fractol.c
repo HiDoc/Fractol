@@ -17,9 +17,7 @@ int		fractol_calc_tri(t_env *env, t_complex (calc)(t_complex z0),
 {
 	int			count;
 	t_complex	z1;
-	t_complex	z2;
 
-	z2 = z0;
 	count = 0;
 	while (count < MAXITER && (!count || c_abs(z1) < RADSQR))
 	{

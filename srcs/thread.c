@@ -43,9 +43,7 @@ t_env	*fractol_threadt(t_env *env, int line)
 void	*launch_thread(void *arg)
 {
 	t_thread	*tmp;
-	int			res;
 
-	res = WIN_X * WIN_Y;
 	tmp = (t_thread *)arg;
 	fractol_threadt(tmp->env, tmp->nbr);
 	pthread_exit(NULL);
